@@ -1,5 +1,18 @@
-# Stronghold Here (Fabric 26.3)
-
-Server-only Fabric mod: `/stronghold generate` places a vanilla stronghold underground and stores an Eye of Ender target near the generated stronghold.
-
-Build with `gradle build` using Java 25, or use the GitHub Actions build workflow. **Back up your world and test before deployment.**
+{
+  "schemaVersion": 1,
+  "id": "strongholdhere",
+  "version": "${version}",
+  "name": "Stronghold Here",
+  "description": "Place vanilla strongholds near the player and redirect nearby Eyes of Ender.",
+  "authors": ["Custom server mod"],
+  "license": "MIT",
+  "environment": "server",
+  "entrypoints": {"main": ["de.strongholdhere.StrongholdHereMod"]},
+  "mixins": ["strongholdhere.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "26.3",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
