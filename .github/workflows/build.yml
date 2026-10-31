@@ -1,5 +1,26 @@
-# Stronghold Here (Fabric 26.3)
-
-Server-only Fabric mod: `/stronghold generate` places a vanilla stronghold underground and stores an Eye of Ender target near the generated stronghold.
-
-Build with `gradle build` using Java 25, or use the GitHub Actions build workflow. **Back up your world and test before deployment.**
+name: Build Fabric 26.3 server mod
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.6.0'
+      - name: Build mod
+        run: gradle --no-daemon --stacktrace build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: StrongholdHere-Fabric-26.3-Server-JAR
+          path: build/libs/strongholdhere-26.3-server-1.0.0.jar
+          if-no-files-found: error
